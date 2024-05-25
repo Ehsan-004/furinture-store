@@ -12,7 +12,7 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=100)
     description = QuillField()
-    price = models.IntegerField(max_length=15)
+    price = models.IntegerField()
     special_property = QuillField()
     category = models.ForeignKey(to=Category, on_delete=models.CASCADE)
 

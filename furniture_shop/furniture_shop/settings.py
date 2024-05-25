@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_quill',
     'products',
     'about_us',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -126,6 +127,7 @@ STATIC_URL = 'statics/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'statics',
+    'statics',
 ]
 
 

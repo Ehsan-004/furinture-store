@@ -1,10 +1,20 @@
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.generic import View
 
 app_name = 'products'
 
-def index(request):
-    return render(request, 'index.html')
+
+class IndexView(View):
+    http_method_names = ['get', 'post']
+
+    def get(self, request: any) -> HttpResponse:
+        return render(request, 'index.html')
 
 
-def product_list(request):
-    return render(request, 'product.html')
+class ProductsView(View):
+    http_method_names = ['get', 'post']
+
+    def get(self, request: any) -> HttpResponse:
+        return render(request, 'product.html')
+

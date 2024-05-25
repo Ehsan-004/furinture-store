@@ -1,13 +1,20 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
 
-def about(req):
-    return render(req, 'about.html')
+class AboutUs(TemplateView):
+    http_method_names = ['get', 'post']
+    template_name = 'about.html'
+    extra_context = {}
 
 
-def contact(req):
-    return render(req, 'contact.html')
+class Contact(TemplateView):
+    http_method_names = ['get', 'post']
+    template_name = 'contact.html'
+    extra_context = {}
 
 
-def services(req):
-    return render(req, 'services.html')
+class Services(TemplateView):
+    http_method_names = ['get', 'post']
+    template_name = 'services.html'
+    extra_context = {}
