@@ -28,9 +28,18 @@ class Basket(models.Model):
 
 
 class Comment(models.Model):
+    rate = [
+        ("1","1"),
+        ("2","2"),
+        ("3","3"),
+        ("4","4"),
+        ("5","5"),
+    ]
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE, null=True, blank=True)
     author  = models.ForeignKey(to=Customer, on_delete=models.CASCADE, null=True, blank=True)
     content = models.TextField()
+    rating = models.CharField(choices=rate, default=0, max_length=5)
+
 
     def __str__(self):
         return self.content

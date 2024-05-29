@@ -24,6 +24,7 @@ class IndexView(View):
                 'name': product.name,
                 'price': product.price,
                 'image': images[0],
+                'product_id': str(product.id),
             })
         # === === === === === === === === === === === === === === === === === ===
         # 4 products which are indexed in the index page
@@ -34,6 +35,7 @@ class IndexView(View):
                 'price': product.price,
                 'image': image[0],
                 'description': product.description,
+                'product_id': str(product.id),
             })
         # === === === === === === === === === === === === === === === === === ===
         context = {
@@ -55,7 +57,37 @@ class ProductsView(View):
                 'name': product.name,
                 'price': product.price,
                 'image': images[0],
+                'product_id': str(product.id),
             })
 
         context = {'product_details': product_details}
         return render(request, 'product.html', context)
+
+
+class ProductDetailView(View):
+    http_method_names = ['get', 'post']
+
+    def get(self, request: any, product_id: str) -> HttpResponse:
+        pid = int(product_id)
+        product = Product.objects.get(pk=pid)
+        images = Image.objects.all().filter(product__name=product.name)
+        comments = Comment.objects.all().filter(product__name=product.name)
+        comment_details = []
+        for comment in comments:
+            comment_details.append({
+                'author': comment.author.user_profile.username,
+                'content': comment.content,
+                'rate': str(comment.rating)
+            })
+
+        context = {
+            'name': product.name,
+            'price': product.price,
+            'description': product.description,
+            'special_property': product.special_property,
+            'category': product.category,
+            'images': images,
+            'comments': comments,
+            }
+
+        return render(request, 'single.html', context)

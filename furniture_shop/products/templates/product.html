@@ -82,20 +82,22 @@
                 </div>
                 <div class="row">
                     <!-- === === === === === === === === === products === === === === === === === === === -->
-                    {% for products in product_details %}
+                    {% for product in product_details %}
                         <div class="col-md-4 text-center animate-box">
                             <div class="product">
-                                <div class="product-grid" style="background-image:url({{ products.image }});">
+                                <div class="product-grid" style="background-image:url({{ product.image }});">
                                     <div class="inner">
                                         <p>
-                                            <a href="single.html" class="icon"><i class="icon-shopping-cart"></i></a>
-                                            <a href="single.html" class="icon"><i class="icon-eye"></i></a>
+                                            <a href="" class="icon"><i class="icon-shopping-cart"></i></a>
+                                            <a href="{% url 'products:product_detail' product.product_id %}" class="icon">
+                                                <i class="icon-eye"></i>
+                                            </a>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="desc">
-                                    <h3><a href="single.html">{{ products.name }}</a></h3>
-                                    <span class="price">{{ products.price }}</span>
+                                    <h3><a href="{% url 'products:product_detail' product.product_id %}">{{ product.name }}</a></h3>
+                                    <span class="price">{{ product.price }}</span>
                                 </div>
                             </div>
                         </div>
