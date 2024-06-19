@@ -57,45 +57,40 @@
             </div>
         </nav>
 
-        <div id="fh5co-contact">
+    </div>
+
+
+    <div class="fh5co-loader"></div>
+
+    <div id="page">
+    <nav class="fh5co-nav" role="navigation">
+        <div id="fh5co-started">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-5 col-md-push-1 animate-box">
-                        <div class="fh5co-contact-info">
-                            <h3>Login help</h3>
-                            <br>
-                            <ul style="font-size: 20px">
-                                <li><a href=""><b>Forget password?</b></a></li>
-                                <li><a href="{% url 'user:register' %}"><b>No account? create one!</b></a></li>
-                                <li>{{ error }}</li>
-                            </ul>
-                        </div>
+                <div class="row animate-box">
+                    <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                        <h2>edit your profile</h2>
                     </div>
-                    <div class="col-md-6 animate-box">
-                        <h3>Login to your account</h3>
-                        <form action="{% url 'user:login' %}" method="post">
-                            {% csrf_token %}
-                            <div class="row form-group">
-                                <div class="col-md-12">
-                                    <label for="username">Username</label>
-                                    <input type="text" id="username" class="form-control" placeholder="Your username" name="username">
+                </div>
+                <div class="row animate-box">
+                    <div class="col-md-8 col-md-offset-2">
+                        <form class="form-inline">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <h2>username</h2>
                                 </div>
                             </div>
-                            <div class="row form-group">
-                                <div class="col-md-12">
-                                    <label for="Password">Password</label>
-                                    <input type="text" id="Password" class="form-control" placeholder="your password" name="password">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="login" class="btn btn-primary">
+                            <div class="col-md-6 col-sm-6">
+                                <form action="{% url 'user:profile_edit' %}" method="post">
+                                    <h3>{{ user.username }}</h3>
+                                </form>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </nav>
+
 
     <div class="gototop js-top">
         <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>

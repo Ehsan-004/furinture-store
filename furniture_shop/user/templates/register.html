@@ -1,10 +1,121 @@
-<!DOCTYPE html>
+{% extends 'BaseTemplate.html' %}
+{% load  static %}
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    {% block title %}Login{% endblock %}
 </head>
 <body>
+{% block content %}
+    <div class="fh5co-loader"></div>
+
+    <div id="page">
+        <nav class="fh5co-nav" role="navigation">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-xs-2">
+                        <div id="fh5co-logo"><a href="{% url 'products:index' %}">Shop.</a></div>
+                    </div>
+                    <div class="col-md-6 col-xs-6 text-center menu-1">
+                        <ul>
+                            <li>
+                                <a href="{% url 'products:index'  %}">Home</a>
+                            </li>
+                            <li class="has-dropdown">
+                                <a href="{% url 'products:product_list' %}">Shop</a>
+                            </li>
+                            <li><a href="{% url 'about:about' %}">About</a></li>
+                            <li class="has-dropdown">
+                                <a href="{% url 'about:services' %}">Services</a>
+                                <ul class="dropdown">
+                                    <li><a href="#">Web Design</a></li>
+                                    <li><a href="#">eCommerce</a></li>
+                                    <li><a href="#">Branding</a></li>
+                                    <li><a href="#">API</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{% url 'about:contact' %}">Contact</a></li>
+
+                            <li class="active"><a href="{% url 'user:register' %}"><b>SignUp</b></a></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-xs-4 text-right hidden-xs menu-2">
+                        <ul>
+                            <li class="search">
+                                <div class="input-group">
+                                    <input type="text" placeholder="Search..">
+                                    <span class="input-group-btn">
+						        <button class="btn btn-primary" type="button"><i class="icon-search"></i></button>
+						      </span>
+                                </div>
+                            </li>
+                            <li class="shopping-cart"><a href="#" class="cart"><span><small>0</small><i class="icon-shopping-cart"></i></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div id="fh5co-contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 col-md-push-1 animate-box">
+                        <div class="fh5co-contact-info">
+                            <h3>Login help</h3>
+                            <br>
+                            <ul style="font-size: 20px">
+                                <li><a href="{% url 'user:login' %}"><b>Have an account? login!</b></a></li>
+                                <li>{{ error }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 animate-box">
+                        <h3>create your new account:</h3>
+
+                        <form action="{% url 'user:register' %}" method="post">
+                            {% csrf_token %}
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <label for="username">Username</label>
+                                    <input type="text" id="username" class="form-control" placeholder="Your username" name="username">
+                                </div>
+                            </div>
+                            {{ username_error }}
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" class="form-control" placeholder="your email" name="email">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <label for="password">password</label>
+                                    <input type="password" id="password" class="form-control" placeholder="your password" name="password">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <label for="repass">repeat password</label>
+                                    <input type="password" id="repass" class="form-control" placeholder="repeat your password" name="repass">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="login" class="btn btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="gototop js-top">
+            <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+        </div>
+    </div>
+{% endblock %}
 
 </body>
 </html>
+

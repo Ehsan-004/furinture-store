@@ -64,6 +64,19 @@ class Comment(models.Model):
         return self.content
 
 
+class BoughtItem(models.Model):
+    products = models.ForeignKey(to=Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(to=Customer, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'bought_item'
+        verbose_name = 'bought_item'
+        verbose_name_plural = 'bought_items'
+
+    def __str__(self):
+        return self.user.user_profile.username + " bought items"
+
+
 class Image(models.Model):
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
     # each product has images and each image has one product
