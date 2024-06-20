@@ -5,99 +5,129 @@
 <head>
     {% block title %}Login{% endblock %}
 </head>
-<body>
-{% block content %}
-    <div class="fh5co-loader"></div>
+<form>
+    {% block content %}
+        <div class="fh5co-loader"></div>
 
-    <div id="page">
-        <nav class="fh5co-nav" role="navigation">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-xs-2">
-                        <div id="fh5co-logo"><a href="{% url 'products:index' %}">Shop.</a></div>
-                    </div>
-                    <div class="col-md-6 col-xs-6 text-center menu-1">
-                        <ul>
-                            <li>
-                                <a href="{% url 'products:index'  %}">Home</a>
-                            </li>
-                            <li class="has-dropdown">
-                                <a href="{% url 'products:product_list' %}">Shop</a>
-                            </li>
-                            <li><a href="{% url 'about:about' %}">About</a></li>
-                            <li class="has-dropdown">
-                                <a href="{% url 'about:services' %}">Services</a>
-                                <ul class="dropdown">
-                                    <li><a href="#">Web Design</a></li>
-                                    <li><a href="#">eCommerce</a></li>
-                                    <li><a href="#">Branding</a></li>
-                                    <li><a href="#">API</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="{% url 'about:contact' %}">Contact</a></li>
+        <div id="page">
+            <nav class="fh5co-nav" role="navigation">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-2">
+                            <div id="fh5co-logo"><a href="{% url 'products:index' %}">Shop.</a></div>
+                        </div>
+                        <div class="col-md-6 col-xs-6 text-center menu-1">
+                            <ul>
+                                <li>
+                                    <a href="{% url 'products:index'  %}">Home</a>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="{% url 'products:product_list' %}">Shop</a>
+                                </li>
+                                <li><a href="{% url 'about:about' %}">About</a></li>
+                                <li class="has-dropdown">
+                                    <a href="{% url 'about:services' %}">Services</a>
+                                    <ul class="dropdown">
+                                        <li><a href="#">Web Design</a></li>
+                                        <li><a href="#">eCommerce</a></li>
+                                        <li><a href="#">Branding</a></li>
+                                        <li><a href="#">API</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{% url 'about:contact' %}">Contact</a></li>
 
-                            <li class="active"><a href="{% url 'user:login' %}"><b>Login</b></a></li>
+                                <li class="active"><a href="{% url 'user:login' %}"><b>Login</b></a></li>
 
-                        </ul>
-                    </div>
-                    <div class="col-md-3 col-xs-4 text-right hidden-xs menu-2">
-                        <ul>
-                            <li class="search">
-                                <div class="input-group">
-                                    <input type="text" placeholder="Search..">
-                                    <span class="input-group-btn">
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-xs-4 text-right hidden-xs menu-2">
+                            <ul>
+                                <li class="search">
+                                    <div class="input-group">
+                                        <input type="text" placeholder="Search..">
+                                        <span class="input-group-btn">
 						        <button class="btn btn-primary" type="button"><i class="icon-search"></i></button>
 						      </span>
-                                </div>
-                            </li>
-                            <li class="shopping-cart"><a href="#" class="cart"><span><small>0</small><i class="icon-shopping-cart"></i></span></a></li>
-                        </ul>
+                                    </div>
+                                </li>
+                                <li class="shopping-cart"><a href="#" class="cart"><span><small>0</small><i class="icon-shopping-cart"></i></span></a></li>
+                            </ul>
+                        </div>
                     </div>
+                </div>
+            </nav>
+
+        </div>
+
+
+        <div class="fh5co-loader"></div>
+
+        <div id="page">
+        <nav class="fh5co-nav" role="navigation">
+            <div id="fh5co-started">
+                <div class="container">
+
+                    <form action="{% url 'user:profile_edit' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row animate-box">
+                            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                                <h2>edit your profile</h2>
+                            </div>
+                        </div>
+                        <div class="row animate-box">
+                            <div class="col-md-8 col-md-offset-2">
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <h2 class="btn btn-default btn-block"><label for="new_first_name">username</label></h2>
+                                        <h2 class="btn btn-default btn-block">email</h2>
+                                        <h2 class="btn btn-default btn-block"><label for="new_email">new email:</label></h2>
+                                        <h2 class="btn btn-default btn-block">your first name:</h2>
+                                        <h2 class="btn btn-default btn-block"><label for="new_first_name">edit your first name:</label></h2>
+                                        <h2 class="btn btn-default btn-block">your last name:</h2>
+                                        <h2 class="btn btn-default btn-block"><label for="new_last_name">edit your last name:</label></h2>
+                                        <h2 class="btn btn-default btn-block">edit your profile picture</h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <h3 class="btn btn-default btn-block">{{ user.username }}</h3>
+                                    <h3 class="btn btn-default btn-block" style="margin-bottom: 0">{{ user.email }}</h3>
+                                    <input class="form-control btn btn-default btn-block" type="email" name="new_email" style="margin-top: 5px; margin-bottom: 0; background-color: #8c8c8c" id="new_email">
+                                    {% if user.first_name %}
+                                        <h3 class="btn btn-default btn-block" style="margin-bottom: 0">{{ user.first_name }}</h3>
+                                    {% else %}
+                                        <h3 class="btn btn-default btn-block" style="margin-bottom: 0">not set!</h3>
+                                    {% endif %}
+                                    <input class="form-control btn btn-default btn-block" type="text" name="new_first_name" style="margin-top: 4px; margin-bottom: 0; background-color: #8c8c8c" id="new_first_name">
+                                    {% if user.last_name %}
+                                        <h3 class="btn btn-default btn-block" style="margin-bottom: 0">{{ user.last_name }}</h3>
+                                    {% else %}
+                                        <h3 class="btn btn-default btn-block" style="margin-bottom: 0">not set!</h3>
+                                    {% endif %}
+                                    <input class="form-control btn btn-default btn-block" type="text" name="new_last_name" style="margin-top: 4px; margin-bottom: 0; background-color: #8c8c8c" id="new_last_name">
+                                    <label for="imgc"><img src="{{ profile_pic }}" alt=""></label>
+                                    <input type="file" name="new_profile_picture" id="imgc" >
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row animate-box">
+                            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                                <input class="col-md-8 col-md-offset-2 text-center fh5co-heading" type="submit" name="edit" id="btn" value="edit">
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </nav>
 
-    </div>
 
-
-    <div class="fh5co-loader"></div>
-
-    <div id="page">
-    <nav class="fh5co-nav" role="navigation">
-        <div id="fh5co-started">
-            <div class="container">
-                <div class="row animate-box">
-                    <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                        <h2>edit your profile</h2>
-                    </div>
-                </div>
-                <div class="row animate-box">
-                    <div class="col-md-8 col-md-offset-2">
-                        <form class="form-inline">
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <h2>username</h2>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <form action="{% url 'user:profile_edit' %}" method="post">
-                                    <h3>{{ user.username }}</h3>
-                                </form>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <div class="gototop js-top">
+            <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
         </div>
-    </nav>
 
+    {% endblock %}
 
-    <div class="gototop js-top">
-        <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-    </div>
-
-{% endblock %}
-
-</body>
+    </body>
 </html>
 

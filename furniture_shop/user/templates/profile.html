@@ -70,9 +70,11 @@
                     <div class="row animate-box">
                         <div class="col-md-6">
                             <div class="desc">
-                                <h3>{{ user.username }}</h3>
+                                <h3>username : {{ user.username }}</h3>
                                 <a href="{% url 'user:logout' %}"><button type="submit" >logout</button></a>
                                 <a href="{% url 'user:profile_edit' %}"><button type="submit" >edit your profile</button></a>
+                                <h3>first name : {{ user.first_name }}</h3>
+                                <h3>last name : {{ user.last_name }}</h3>
                             </div>
                         </div>
                         <div class="col-md-6">

@@ -107,8 +107,34 @@ class UserProfileEdit(View):
     def get(self, request):
         if not request.user.is_authenticated:
             return redirect('user:login')
-        return render(request, self.template_name)
+        customer = Customer.objects.get(user_profile_id=request.user.id)
+        profile_pic = customer.profile_picture.url
+        return render(request, self.template_name, {'profile_pic': profile_pic})
 
+    def post(self, request):
+        if not request.user.is_authenticated:
+            return redirect('user:login')
+        user = request.user
+        customer = Customer.objects.get(user_profile_id=request.user.id)
+
+        new_first_name = request.POST.get('new_first_name', False)
+        new_last_name = request.POST.get('new_last_name', False)
+        new_email = request.POST.get('new_email', False)
+        new_profile = request.FILES.get('new_profile_picture', False)
+
+        if new_profile:
+            customer.profile_picture = new_profile
+            customer.save()
+        if new_first_name:
+            user.first_name = new_first_name
+            user.save()
+        if new_last_name:
+            user.last_name = new_last_name
+            user.save()
+        if new_email:
+            user.email = new_email
+            user.save()
+        return redirect('user:profile')
 
 def logout_view(req):
     if not req.user.is_authenticated:
